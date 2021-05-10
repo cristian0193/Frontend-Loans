@@ -1,19 +1,45 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">
-        <img src="" width="30" height="30" alt=""> Carlos Reina
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<!-- <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand">Carlos Reina</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="home">Pestamos</a>
+                <a class="nav-link" [routerLink]="['/loans']" >Pestamos</a>
             </li>
-            <!-- <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="search">Search</a>
-            </li> -->
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['/client']" >Clientes</a>
+          </li>
         </ul>
+     </div>
+
+      <form class="d-flex">        
+        <span class="navbar-text">
+            <a routerLinkActive="active" class="nav-link" routerLink="home">Salir</a>
+          </span>
+      </form>
     </div>
-</nav>
+  </nav> -->
+
+  <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li lass="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/loans']" >Pestamos</a>
+          </li>
+          <li lass="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/client']" >Clientes</a>
+          </li>
+        </ul>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-warning" [routerLink]="['/login']">Salir</button>
+        </div>
+      </div>
+    </div>
+  </header>

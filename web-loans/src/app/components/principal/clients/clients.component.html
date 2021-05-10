@@ -1,0 +1,101 @@
+<app-navbar></app-navbar>
+
+<figure class="text-center m-3">
+    <blockquote class="blockquote">
+      <h1 >Registro de Clientes</h1>
+    </blockquote>
+</figure>
+
+<div class="container m-5 p-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        + Agregar nuevo client
+    </button>
+    <br>
+    <br> 
+    <table class="table table-bordered">
+    <thead class="table-secondary">
+        <tr>
+            <th class="text-center">Identificacion</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Direccion</th>
+            <th class="text-center">Telefono</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let client of listClient; let i = index;">
+        <tr>
+            <td class="text-center"> {{ client.identification }} </td>
+            <td class="text-center"> {{ client.fullname }} </td>
+            <td class="text-center"> {{ client.address }} </td>
+            <td class="text-center"> {{ client.mobile }} </td>
+            <td class="text-center">
+                <a class="text-danger action">
+                    <i class="fas fa-edit fa-lg m-1"></i>
+                </a>
+                <a class="text-dark action">
+                    <i class="fas fa-trash-alt fa-lg m-1"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <form autocomplete="off" #formLoans="ngForm" (ngSubmit)="formLoans.form.valid" novalidate>
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Información Cliente</h5>
+            <button type="button" class="btn-close" #closebutton1 data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="message-text" class="col-form-label"><b>Identificación:</b></label>
+                    <input type="number" 
+                            class="form-control text-center" 
+                            id="identification" 
+                            name="identification" 
+                            #identification="ngModel" 
+                            [(ngModel)]="client.identification"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="message-text" class="col-form-label"><b>Nombre Completo:</b></label>
+                    <input type="text" 
+                            class="form-control text-center" 
+                            id="fullname" 
+                            name="fullname" 
+                            #fullname="ngModel" 
+                            [(ngModel)]="client.fullname"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="message-text" class="col-form-label"><b>Dirección:</b></label>
+                    <input type="text" 
+                           class="form-control text-center" 
+                           id="address" 
+                           name="address"
+                           #address="ngModel" 
+                           [(ngModel)]="client.address"
+                           required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="message-text" class="col-form-label"><b>Telefono:</b></label>
+                    <input type="text" 
+                           class="form-control text-center" 
+                           id="mobile" 
+                           name="mobile"
+                           #mobile="ngModel" 
+                           [(ngModel)]="client.mobile"
+                           required>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

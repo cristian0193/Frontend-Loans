@@ -23,9 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   getUsernameAndPassword() {
-
-    console.log(this.infoUser)
-
     this.userService.validationLogin(this.infoUser).subscribe(
       data => {
         this.statusResponse = false
@@ -34,8 +31,7 @@ export class LoginComponent implements OnInit {
       errors => {
         this.statusResponse = true
         this.messageError = errors.error.message;
-      } 
-      );
+      });
   }
 
 

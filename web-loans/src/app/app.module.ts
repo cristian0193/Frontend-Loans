@@ -9,17 +9,21 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { LoansComponent } from './components/principal/loans/loans.component';
-import { LoginService } from './services/login.service';
 
 // Services
-
+import { LoginService } from './services/login.service';
+import { LoansService } from './services/loans.service';
+import { DetailComponent } from './components/principal/detail/detail.component';
+import { ClientsComponent } from './components/principal/clients/clients.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    LoansComponent
+    LoansComponent,
+    DetailComponent,
+    ClientsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { LoginService } from './services/login.service';
     AppRoutingModule
   ],
   providers: [
-    LoginService
+    LoginService,
+    LoansService
   ],
   bootstrap: [AppComponent]
 })
