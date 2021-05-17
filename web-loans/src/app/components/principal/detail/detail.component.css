@@ -1,0 +1,36 @@
+.div-table {
+    max-width: 100%;
+    max-height: 50em;
+    overflow: scroll;
+    position: relative;
+}
+
+table {
+    position: relative;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    padding: 0.50em;
+}
+
+thead th {
+    position: -webkit-sticky;
+    /* for Safari */
+    position: sticky;
+    top: 0;
+}
+
+thead th:first-child {
+    left: 0;
+    z-index: 1;
+}
+
+tbody th {
+    position: -webkit-sticky;
+    /* for Safari */
+    position: sticky;
+    left: 0;
+    border-right: 1px solid #CCC;
+}

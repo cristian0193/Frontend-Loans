@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Information } from 'src/app/models/Loans/information';
+import { Payments } from 'src/app/models/Loans/payment';
+import { LoansService } from 'src/app/services/loans.service';
 
 @Component({
   selector: 'app-detail',
@@ -8,11 +11,38 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  listPayments: Payments[] = []
+  information: Information
+  validateArrears: string
+
+  constructor(private loansService: LoansService, 
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     var parameters = this.activatedRoute.snapshot.params.id
-    console.log(parameters)
+    this.getInformationLoan(parameters)
+    this.getPayments(parameters)
+  }
+
+  getInformationLoan(idLoan: number) {
+    this.loansService.getInformation(idLoan).subscribe(
+      data => {
+        this.information = data
+        this.validateArrears = data.monthsArrears > 0 ? "background-color:lightcoral;" : ""
+      },
+      errors => {
+        console.log("Error : " + errors)
+     });
+  }
+
+  getPayments(idLoan: number) {
+    this.loansService.getPlayments(idLoan).subscribe(
+      data => {
+        this.listPayments = data
+      },
+      errors => {
+        console.log("Error : " + errors)
+      });
   }
 
 }

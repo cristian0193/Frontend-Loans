@@ -31,6 +31,7 @@ export class LoansComponent implements OnInit {
   listClient: Client[] = []
   listTypes: Type[] = []
   information: Information
+  pagination: number[]
   records: Records = {identificationClient:0, borrowedValue: 0, interestPercentage: 0};
   payment: Payment = {idLoan:0, idType:0, capital: 0, interest:0}
 
@@ -40,7 +41,7 @@ export class LoansComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.getAllLoan()
+    this.getAllLoan(1)
     this.getClients()
     this.getTypes()
   }
@@ -65,10 +66,14 @@ export class LoansComponent implements OnInit {
       });
   }
 
-  getAllLoan() {
-    this.loansService.getLoans().subscribe(
+  getAllLoan(page: number) {
+    this.pagination = [] 
+    this.loansService.getLoans(page).subscribe(
       data => {
-        this.listLoan = data
+        this.listLoan = data.loans
+        for (let index = 0; index < data.pages; index++) {
+          this.pagination.push(index + 1)
+        }
       },
       errors => {
         console.log("Error : " + errors)
@@ -98,7 +103,7 @@ export class LoansComponent implements OnInit {
         this.notification = data.message
         this.statusResponse = false
         this.cleanModalLoan()
-        this.getAllLoan()
+        this.getAllLoan(1)
         this.closebutton1.nativeElement.click();
       },
       errors => {
@@ -116,7 +121,7 @@ export class LoansComponent implements OnInit {
         this.notification = data.message
         this.statusResponse = false
         this.cleanModalPayment()
-        this.getAllLoan()
+        this.getAllLoan(1)
         this.closebutton2.nativeElement.click();
       },
       errors => {
@@ -135,6 +140,18 @@ export class LoansComponent implements OnInit {
   cleanModalPayment(){
     this.payment.capital = 0
     this.payment.interest = 0
+  }
+
+  filterPagination(page: number){
+    this.getAllLoan(page)
+  }
+
+  firstPosition(){
+    this.getAllLoan(1)
+  }
+
+  lastPosition(){
+    this.getAllLoan(this.pagination.length)
   }
 
 }

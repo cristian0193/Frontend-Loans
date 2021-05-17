@@ -1,3 +1,136 @@
 <app-navbar></app-navbar>
+<br><br>
+<figure class="text-center m-3">
+    <blockquote class="blockquote">
+      <h3>Información del Cliente</h3>
+    </blockquote>
+</figure>
 
-<p>detail works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Identificación:</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" 
+                       [value]="information.identification" disabled>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Nombre Completo:</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" 
+                       [value]="information.fullname" disabled>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Telefono:</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" 
+                       [value]="information.mobile" disabled>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Direccion:</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" 
+                       [value]="information.address" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Capital:</label>
+                <input type="text" class="form-control text-center" id="formGroupExampleInput" 
+                       [ngModel]="information.borrowedValue | currency: 'USD' : 'symbol' : '1.0-0'" 
+                       (ngModelChange)="information.borrowedValue=$event"
+                       disabled>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Interes (%):</label>
+                <input type="text" class="form-control text-center" id="formGroupExampleInput" 
+                       [value]="information.interest" disabled>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Cuota Mensual:</label>
+                <input type="text" class="form-control text-center" id="formGroupExampleInput" 
+                       [ngModel]="information.monthlyFee | currency: 'USD' : 'symbol' : '1.0-0'" 
+                       (ngModelChange)="information.monthlyFee=$event"
+                       disabled>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Mora (Meses):</label>
+                <input type="text" class="form-control text-center" id="formGroupExampleInput" 
+                       [value]="information.monthsArrears"
+                       [style]="validateArrears"
+                       disabled>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Estado:</label>
+                <input type="text" class="form-control text-center" id="formGroupExampleInput" 
+                       [value]="information.state" disabled>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-1">
+                <label for="formGroupExampleInput" class="form-label">Fecha:</label>
+                <input type="text" class="form-control text-center" id="formGroupExampleInput" 
+                       [ngModel]="information.loanDate | date:'dd-MM-yyyy' " 
+                       (ngModelChange)="information.loanDate=$event"
+                       disabled>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<figure class="text-center m-3">
+    <blockquote class="blockquote">
+      <h4>Detalle de Pagos</h4>
+    </blockquote>
+</figure>
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+
+        <div *ngIf="listPayments.length <= 0" class=" text-center alert alert-info">
+            No se encuentran pagos registados!
+        </div>
+
+        <table *ngIf="listPayments.length > 0" class="table table-bordered">
+            <thead class="table-secondary">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Capital</th>
+                    <th class="text-center">Interes</th>
+                    <th class="text-center">Balance</th>
+                    <th class="text-center">Fecha Pago</th>
+                    <th class="text-center">Tipo</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let payment of listPayments; let i = index;">
+                <tr>
+                    <td class="text-center"> {{ (i + 1) }} </td>
+                    <td class="text-center"> {{ payment.capital | currency: 'USD' : 'symbol' : '1.0-0' }} </td>
+                    <td class="text-center"> {{ payment.interest | currency: 'USD' : 'symbol' : '1.0-0' }} </td>
+                    <td class="text-center"> {{ payment.balance | currency: 'USD' : 'symbol' : '1.0-0' }} </td>
+                    <td class="text-center"> {{ payment.paymentDate | date:"dd-MM-yyyy" }} </td>
+                    <td class="text-center">
+                        <span *ngIf="payment.idType == 1" span class="badge bg-success"> {{ payment.type }}</span>
+                        <span *ngIf="payment.idType == 2" span class="badge bg-warning text-dark">{{ payment.type }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
