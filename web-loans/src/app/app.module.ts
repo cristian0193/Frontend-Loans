@@ -9,12 +9,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { LoansComponent } from './components/principal/loans/loans.component';
+import { DetailComponent } from './components/principal/detail/detail.component';
+import { ClientsComponent } from './components/principal/clients/clients.component';
+import { OutstandingComponent } from './components/principal/outstanding/outstanding.component';
 
 // Services
 import { LoginService } from './services/login.service';
 import { LoansService } from './services/loans.service';
-import { DetailComponent } from './components/principal/detail/detail.component';
-import { ClientsComponent } from './components/principal/clients/clients.component';
+import { ClientService } from './services/client.service';
+import { TypesService } from './services/types.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { ClientsComponent } from './components/principal/clients/clients.compone
     NavbarComponent,
     LoansComponent,
     DetailComponent,
-    ClientsComponent
+    ClientsComponent,
+    OutstandingComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { ClientsComponent } from './components/principal/clients/clients.compone
   ],
   providers: [
     LoginService,
-    LoansService
+    LoansService,
+    ClientService,
+    TypesService
   ],
   bootstrap: [AppComponent]
 })

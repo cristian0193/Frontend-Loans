@@ -14,12 +14,25 @@ export class ClientService {
   });
 
   urlBase = "http://localhost:8080"
-  urlLoan = this.urlBase + "/clients"
+  urlClient = this.urlBase + "/clients"
+  urlClientById = this.urlBase + "/clients/"
 
   constructor(private http: HttpClient) { }
 
   getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(this.urlLoan, {headers: this.headers})
+    return this.http.get<Client[]>(this.urlClient, {headers: this.headers})
+  }
+
+  getClientById(id: number): Observable<Client> {
+    return this.http.get<Client>(this.urlClientById + id, {headers: this.headers})
+  }
+
+  createClient(client: Client): Observable<Response> {
+    return this.http.post<Response>(this.urlClient, client, {headers: this.headers})
+  }
+
+  updateClient(client: Client): Observable<Response> {
+    return this.http.put<Response>(this.urlClient, client, {headers: this.headers})
   }
 
 }

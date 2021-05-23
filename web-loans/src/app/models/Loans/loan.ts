@@ -14,3 +14,7 @@ export class Loan {
     idStatus: string;
     status: string;
 }
+
+export class Search {
+    fullname: string;
+}

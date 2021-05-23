@@ -5,16 +5,19 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0"> 
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/outstanding']">Pendientes</a>
+        </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/loans']" >Pestamos</a>
+          <a class="nav-link" [routerLink]="['/loans']">Pagados</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/client']" >Clientes</a>
         </li>
       </ul>
       <form class="d-flex">
-        <button type="button" class="btn btn-warning" [routerLink]="['/login']">Salir</button>
+        <button type="button" class="btn btn-warning" (click)="logout()">Salir</button>
       </form>
     </div>
   </div>

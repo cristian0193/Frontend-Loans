@@ -7,8 +7,8 @@
 </figure>
 
 <div class="container m-5 p-3">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        + Agregar nuevo client
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clientModal" (click)="clear()">
+        + Agregar nuevo cliente
     </button>
     <br>
     <br> 
@@ -29,11 +29,8 @@
             <td class="text-center"> {{ client.address }} </td>
             <td class="text-center"> {{ client.mobile }} </td>
             <td class="text-center">
-                <a class="text-danger action">
+                <a class="text-danger action" data-bs-toggle="modal" data-bs-target="#clientModal" (click)="getClientById(client.identification)">
                     <i class="fas fa-edit fa-lg m-1"></i>
-                </a>
-                <a class="text-dark action">
-                    <i class="fas fa-trash-alt fa-lg m-1"></i>
                 </a>
             </td>
         </tr>
@@ -41,7 +38,7 @@
 </table>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <form autocomplete="off" #formLoans="ngForm" (ngSubmit)="formLoans.form.valid" novalidate>
         <div class="modal-content">
@@ -58,6 +55,7 @@
                             name="identification" 
                             #identification="ngModel" 
                             [(ngModel)]="client.identification"
+                            [disabled]="isVisible"
                             required>
                     </div>
                     <div class="mb-3">
@@ -90,10 +88,16 @@
                            [(ngModel)]="client.mobile"
                            required>
                     </div>
+                    <div class="checkbox mb-3 text-center">
+                        <div *ngIf="statusResponse" class="alert alert-danger" role="alert">
+                        {{ messageError }} 
+                        </div>
+                    </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button *ngIf="statusButon == true" type="submit" class="btn btn-primary" (click)="createClient()">Guardar</button>
+            <button *ngIf="statusButon == false" type="submit" class="btn btn-danger" (click)="updateClient()">Actualizar</button>
             </div>
         </div>
     </form>

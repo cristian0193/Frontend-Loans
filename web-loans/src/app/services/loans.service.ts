@@ -27,8 +27,12 @@ export class LoansService {
 
   constructor(private http: HttpClient) { }
 
-  getLoans(page: number): Observable<Consults> {
-    return this.http.get<Consults>(this.urlLoan + page, {headers: this.headers})
+  getLoansPaid(page: number, client: string): Observable<Consults> {
+    return this.http.get<Consults>(this.urlLoan + page + "&client=" + client + "&status=1", {headers: this.headers})
+  }
+
+  getLoansOutstanding(page: number, client: string): Observable<Consults> {
+    return this.http.get<Consults>(this.urlLoan + page + "&client=" + client + "&status=2", {headers: this.headers})
   }
 
   getInformation(idLoan: number): Observable<Information> {

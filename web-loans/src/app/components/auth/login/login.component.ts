@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
     this.userService.validationLogin(this.infoUser).subscribe(
       data => {
         this.statusResponse = false
-        this.router.navigate(['/loans']);
+        localStorage.setItem('SESSION', "OK");
+        this.router.navigate(['/outstanding']);
       },
       errors => {
         this.statusResponse = true
