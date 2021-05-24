@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Client } from '../models/Clients/client';
+import { environment } from '.././../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,8 @@ export class ClientService {
     "X-Lang":"ES",
   });
 
-  urlBase = "http://localhost:8080"
-  urlClient = this.urlBase + "/clients"
-  urlClientById = this.urlBase + "/clients/"
+  urlClient = environment.urlbase + "/clients"
+  urlClientById = environment.urlbase + "/clients/"
 
   constructor(private http: HttpClient) { }
 

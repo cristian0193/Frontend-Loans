@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Type } from '../models/Types/type';
+import { environment } from '.././../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,7 @@ export class TypesService {
     "X-Lang":"ES",
   });
 
-  urlBase = "http://localhost:8080"
-  urlLoan = this.urlBase + "/types"
+  urlLoan = environment.urlbase + "/types"
 
   constructor(private http: HttpClient) { }
 

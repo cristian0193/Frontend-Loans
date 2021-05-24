@@ -56,12 +56,15 @@ selectType(id){
   if (id == 1) {
     this.disableCapital = false
     this.disableInterest = true
+    this.payment.interest = 0
   }else if (id == 2){
     this.disableCapital = true
     this.disableInterest = false
+    this.getFee(this.id)
   }else{
     this.disableCapital = false
     this.disableInterest = false
+    this.getFee(this.id)
   }
 }
 
@@ -105,6 +108,7 @@ getDetailLoans(idLoan: number){
 
 getFee(idLoan: number) {
   this.id = idLoan
+  this.payment.capital = 0
   this.loansService.getInformation(idLoan).subscribe(
     data => {
       this.name = data.fullname

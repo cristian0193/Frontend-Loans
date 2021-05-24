@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { User } from '../models/Login/user';
 import { Observable } from 'rxjs';
+import { environment } from '.././../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,8 @@ export class LoginService {
     "Content-Type": "application/json",
     "X-Lang":"ES",
   });
-
-  urlBase = "http://localhost:8080"
-  urlValidationLogin = this.urlBase + "/users"
+    
+  urlValidationLogin = environment.urlbase + "/users"
 
   constructor(private http: HttpClient) { }
 

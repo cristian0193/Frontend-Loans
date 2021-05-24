@@ -6,7 +6,7 @@ import { Consults, Loan } from '../models/Loans/loan';
 import { Payment, Payments } from '../models/Loans/payment';
 import { Records } from '../models/Loans/records';
 import { Response } from '../models/Shared/response';
-
+import { environment } from '.././../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +18,11 @@ export class LoansService {
     "X-Lang":"ES",
   });
 
-  urlBase = "http://localhost:8080"
-  urlLoan = this.urlBase + "/loans?page="
-  urlCreateLoan = this.urlBase + "/loans"
-  urlPayment = this.urlBase + "/loans/payment"
-  urlInformation = this.urlBase + "/loans/information/"
-  urlPayments = this.urlBase + "/loans/historial/"
+  urlLoan = environment.urlbase + "/loans?page="
+  urlCreateLoan = environment.urlbase + "/loans"
+  urlPayment = environment.urlbase+ "/loans/payment"
+  urlInformation = environment.urlbase + "/loans/information/"
+  urlPayments = environment.urlbase + "/loans/historial/"
 
   constructor(private http: HttpClient) { }
 
