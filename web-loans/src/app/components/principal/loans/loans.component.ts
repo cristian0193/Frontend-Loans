@@ -20,7 +20,7 @@ export class LoansComponent implements OnInit {
   listLoan: Loan[] = []
   pagination: number[]
   search: Search = {fullname: ""}
-  records: Records = {identificationClient:0, borrowedValue: 0, interestPercentage: 0};
+  records: Records = {identificationClient:0, borrowedValue: 0, interestPercentage: 0, creationDate: null};
 
   constructor(private loansService: LoansService, 
               private router: Router) { }

@@ -3,6 +3,7 @@ export class Payment {
     idType: number;
     capital: number;
     interest: number;
+    paymentDate: Date;
 }
 
 export class Payments {

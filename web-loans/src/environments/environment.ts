@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  //urlbase: "http://localhost:8080",
   urlbase: "https://backend-loans.herokuapp.com"
 };
 

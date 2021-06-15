@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-4">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loanModal">
                     + Agregar nuevo prestamo
                 </button>
             </div>
@@ -92,9 +92,9 @@
     
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="loanModal" tabindex="-1" aria-labelledby="loanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <form autocomplete="off" #formLoans="ngForm" (ngSubmit)="formLoans.form.valid && createLoan()" novalidate>
+    <form autocomplete="off" #formLoans="ngForm" (ngSubmit)="createLoan()" novalidate>
         <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Información del Préstamo</h5>
@@ -133,6 +133,16 @@
                         [(ngModel)]="records.interestPercentage"
                         required>
                 </div>
+                <div class="mb-3">
+                    <label for="message-text" class="col-form-label"><b>Fecha Registro: </b></label>
+                    <input type="date" 
+                            class="form-control text-center" 
+                            id="creationDate" 
+                            name="creationDate" 
+                            #interestPercentage="ngModel" 
+                            [(ngModel)]="records.creationDate"
+                            required>
+                    </div>
                 <div class="checkbox mb-3 text-center">
                     <div *ngIf="statusResponse" class="alert alert-danger" role="alert">
                     {{ messageError }} 
@@ -150,7 +160,7 @@
 
 <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <form autocomplete="off" #formPayment="ngForm" (ngSubmit)="formPayment.form.valid && createPayment()" novalidate>
+    <form autocomplete="off" #formPayment="ngForm" (ngSubmit)="createPayment()" novalidate>
         <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title" id="paymentModalLabel">Información del Pago</h5>
@@ -201,6 +211,16 @@
                         [disabled]="disableInterest"
                         required>
                 </div>
+                <div class="mb-3">
+                    <label for="message-text" class="col-form-label"><b>Fecha Registro:</b></label>
+                    <input type="date" 
+                            class="form-control text-center" 
+                            id="paymentDate" 
+                            name="paymentDate" 
+                            #interestPercentage="ngModel" 
+                            [(ngModel)]="payment.paymentDate"
+                            required>
+                    </div>
                 <div class="checkbox mb-3 text-center">
                     <div *ngIf="statusResponse" class="alert alert-danger" role="alert">
                     {{ messageError }} 

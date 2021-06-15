@@ -34,8 +34,8 @@ listTypes: Type[] = []
 information: Information
 pagination: number[]
 search: Search = {fullname: ""}
-records: Records = {identificationClient:0, borrowedValue: 0, interestPercentage: 0};
-payment: Payment = {idLoan:0, idType:0, capital: 0, interest:0}
+records: Records = {identificationClient:0, borrowedValue: 0, interestPercentage: 0, creationDate: null};
+payment: Payment = {idLoan:0, idType:0, capital: 0, interest:0, paymentDate: null}
 
 constructor(private loansService: LoansService, 
             private clientService: ClientService,
@@ -120,44 +120,49 @@ getFee(idLoan: number) {
 }
 
 createLoan() {
-  this.records.identificationClient = Number(this.records.identificationClient);
-  this.loansService.createLoans(this.records).subscribe(
-    data => {
-      this.notification = data.message
-      this.statusResponse = false
-      this.cleanModalLoan()
-      this.getAllLoan(1)
-      this.closebutton1.nativeElement.click();
-    },
-    errors => {
-      this.statusResponse = true
-      this.cleanModalLoan()
-      this.messageError = errors.error.message;
-   });
+  if (this.validationLoan() != true) {
+    this.records.identificationClient = Number(this.records.identificationClient);
+    this.loansService.createLoans(this.records).subscribe(
+      data => {
+        this.notification = data.message
+        this.statusResponse = false
+        this.cleanModalLoan()
+        this.getAllLoan(1)
+        this.closebutton1.nativeElement.click();
+      },
+      errors => {
+        this.statusResponse = true
+        this.cleanModalLoan()
+        this.messageError = errors.error.message;
+     });
+  }  
 }
 
 createPayment(){
-  this.payment.idLoan = this.id
-  this.payment.idType = Number(this.payment.idType)
-  this.loansService.createPayment(this.payment).subscribe(
-    data => {
-      this.notification = data.message
-      this.statusResponse = false
-      this.cleanModalPayment()
-      this.getAllLoan(1)
-      this.closebutton2.nativeElement.click();
-    },
-    errors => {
-      this.statusResponse = true
-      this.cleanModalPayment()
-      this.messageError = errors.error.message;
-   });
+  if (this.validationPayment() != true) {
+    this.payment.idLoan = this.id
+    this.payment.idType = Number(this.payment.idType)
+    this.loansService.createPayment(this.payment).subscribe(
+      data => {
+        this.notification = data.message
+        this.statusResponse = false
+        this.cleanModalPayment()
+        this.getAllLoan(1)
+        this.closebutton2.nativeElement.click();
+      },
+      errors => {
+        this.statusResponse = true
+        this.cleanModalPayment()
+        this.messageError = errors.error.message;
+     });
+  }
 }
 
 cleanModalLoan(){
   this.records.identificationClient = 0
   this.records.borrowedValue = 0
   this.records.interestPercentage = 0
+  this.records.creationDate = null
 }
 
 cleanModalPayment(){
@@ -175,6 +180,41 @@ firstPosition(){
 
 lastPosition(){
   this.getAllLoan(this.pagination.length)
+}
+
+validationLoan(): boolean{
+  this.statusResponse = false
+  if (this.records.identificationClient == 0) {
+    this.statusResponse = true
+    this.messageError = "Seleccione un cliente";
+    return true
+  }
+  if (this.records.borrowedValue <= 0) {
+    this.statusResponse = true
+    this.messageError = "El prestamo debe ser mayor a 0";
+    return true
+  }
+  if (this.records.creationDate == null) {
+    this.statusResponse = true
+    this.messageError = "Ingrese una fecha";
+    return true
+  }
+  return false
+}
+
+validationPayment(): boolean{
+  this.statusResponse = false
+  if (this.payment.idType == 0) {
+    this.statusResponse = true
+    this.messageError = "Seleccione un tipo";
+    return true
+  }
+  if (this.payment.paymentDate == null) {
+    this.statusResponse = true
+    this.messageError = "Ingrese una fecha";
+    return true
+  }
+  return false
 }
 
 }
