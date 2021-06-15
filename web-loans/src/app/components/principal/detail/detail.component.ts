@@ -35,6 +35,7 @@ export class DetailComponent implements OnInit {
     this.loansService.getInformation(idLoan).subscribe(
       data => {
         this.information = data
+        this.information.loanDate = data.loanDate.split("T")[0]
         this.validateArrears = data.monthsArrears > 0 ? "background-color:lightcoral;" : ""
       },
       errors => {

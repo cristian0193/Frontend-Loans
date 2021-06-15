@@ -83,7 +83,7 @@
             <div class="mb-1">
                 <label for="formGroupExampleInput" class="form-label">Fecha:</label>
                 <input type="text" class="form-control text-center" id="formGroupExampleInput" 
-                       [ngModel]="information.loanDate | date:'dd-MM-yyyy' " 
+                       [ngModel]="information.loanDate" 
                        (ngModelChange)="information.loanDate=$event"
                        disabled>
             </div>
